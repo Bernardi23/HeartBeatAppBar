@@ -42,19 +42,19 @@ We have 3 properties:
 
 Then we are defining 3 functions. `lerp`, `sigmoid` and `parabola`, which are used to determine some of the values. I'm not going to go through the math of this, but this allows us to have smoother animations.
 
-We also have a `bool inversed` a `List<Offset> _points`. The first one is important to determine if the path will have to go from left to right, or from right to left. The second will contain the all of the points that are going to be used to make our heartbeat path. That means `_points[0]` is `beginning`, and the last value of `_points` is `ending`.
+We also have a `bool inversed` a `List<Offset> _points`. The first one is important to determine if the path will have to go from left to right, or from right to left. The second will contain all of the points that are going to be used to make our heartbeat path. That means `_points[0]` is the first point of the path, and the last value of `_points` is last point of the path.
 
 In `_points`, we hard coded a bunch of values:
 
-- The ones that start with `beginning + a * PERCENTAGE` allows us to make a lot of points in between the beginning of the path, and the heartbeat itself (which is always in the middle). If we didn't have this, the path would be "skipping", and the animation would not look smooth at all.
-- The same goes for the ones that start with `startingPoint + 30 + b * PERCENTAGE`. This makes a bunch of points in between the ending of the heartbeat itself, and the ending point of whole path.
-- All of the other points are the heartbeat itself being hard coded
-- `startingPoint` is the X position of the beginning of the heartbeat.
+- The ones that start with `beginning + a * PERCENTAGE` allows us to make a lot of points in between the beginning of the path, and the heartbeat wave (which is always in the middle). If we didn't have this, the path would be "skippy", and the animation would not look smooth at all.
+- The same goes for the ones that start with `startingPoint + 30 + b * PERCENTAGE`. This makes a bunch of points in between the ending of the heartbeat wave, and the ending point of the whole path.
+- All of the other points are the heartbeat wave being hard coded
+- `startingPoint` is the X position of the beginning of the heartbeat wave.
 
-> As you can see from the code, `_positions` change depending on the `_inversed` value, and so, if the animation is going from left to right or right to left.
+> As you can see from the code, `_positions` changes depending on the `_inversed` value, and therefore, on the direction of the heartbeat animation.
 
 Now here comes the main part. We have a variable `start` that indicates what is the **first point** of our path, and this changes depending on the `_animation.value`. Hence, if `_animation.value` is closer to 1, the `start` value will be greater, which makes the back of the path start to move when the animation starts progressing. We also have a `percentage` variable, which is what controls the front of the path, since this will define the **last point** of our path.
 
-From there, what we are calling a for loop, that goes from the `start` point (first), to `percentage` point (last), and adds all of the points in between to the path.
+From there, we are calling a for loop, that goes from the `start` point (first), to `percentage` point (last), and adds all of the points in between to the path.
 
-> The color of the path (which is a gradient) and the circle (which is the indicator of the current icon) also animate and get its value depending on the `inverse` value.
+> The color of the path (which is a gradient) and the circle (which is the indicator of the current icon) also animate and get its properties depending on the `inverse` value.
