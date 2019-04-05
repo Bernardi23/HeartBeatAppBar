@@ -28,16 +28,16 @@ We have 3 properties in the `HeartBeatAppBarContent's` state.
 
 - `_positions` is a List of doubles which allows us to know what is the position in the X axis of each icon. This was hardcoded but it can and should be responsive to the width of the device.
 
-> When an animation is called, `_nextActivated` gets the value of the clicked button (if the first icon was clicked, then `_nextActivated` is set to 1, since the default value is 0). Now, we give the HeartBeatPainter its `beginning` property of `_positions[_activated]` and its `ending` property of `_positions[_nextActivated]`. Once the animation ends, `_activated` is set to `_nextActivated` and _nextActivated is set back to 0.
+> When an animation is called, `_nextActivated` gets the value of the clicked button (if the first icon was clicked, then `_nextActivated` is set to 1, since the default value is 0). Now, we give the HeartBeatPainter its `beginning` property of `_positions[_activated]` and its `ending` property of `_positions[_nextActivated]`.In other words, the `HeartBeatPath` will start at the **position of the activated icon**, and will go to the **position of the next activated icon**. Once the animation ends, `_activated` is set to `_nextActivated` and _nextActivated is set back to 0.
 
 ### The CustomPaint
 
-This is where things get a little hairy, but I'll try to keep it very simple. `HeartBeatPainter extends CustomPainter`. That means that it needs to methods: `paint` and `shouldRepaint`. Since we're using an animation coming from its parent widget, we are not going to need `shouldRepaint`, so it just returns false.
+This is where things get a little hairy, but I'll try to keep it very simple. `HeartBeatPainter extends CustomPainter`. That means that it needs two methods: `paint` and `shouldRepaint`. Since we're using an animation coming from its parent widget, we are not going to need `shouldRepaint`, so it just returns false.
 
 We have 3 properties:
 
 - `beginning` is the starting X position of the `HeartBeatPath`, and its coming from `_positions[_activated]`.
-- `ending` is the ending X position of the `HeartBeatPath`, and its coming from `_positions[_nextActivated]`. This makes sense because we're going to be making a path from the current activated icon, to the where we just clicked
+- `ending` is the ending X position of the `HeartBeatPath`, and its coming from `_positions[_nextActivated]`.
 - `animation` is an `Animation<double>` which is what allows us to know how much of the animation has passed. So if its value is 0.5, that means 50% of the animation has gone through, and that's useful to determine what is the current state of the path itself. This will be passed to the `super` constructor as the `repaint` attribute.
 
 Then we are defining 3 functions. `lerp`, `sigmoid` and `parabola`, which are used to determine some of the values. I'm not going to go through the math of this, but this allows us to have smoother animations.
