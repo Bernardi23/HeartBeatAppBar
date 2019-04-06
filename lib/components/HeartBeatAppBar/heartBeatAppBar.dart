@@ -80,26 +80,23 @@ class _HeartBeatAppBarContentState extends State<HeartBeatAppBarContent>
     }
   }
 
-  void _startAnimation(int newActivated) async {
+  void _startAnimation(int newActivated) {
     if (!_animationController.isAnimating && newActivated != _activated) {
       int animationDuration = 700 + ((newActivated - _activated).abs()) * 100;
       _animationController.duration = Duration(milliseconds: animationDuration);
-      _heartBeatController.duration = Duration(milliseconds: animationDuration);
 
       setState(() {
         _nextActivated = newActivated;
       });
 
       _animationController.forward();
-      _heartBeatController.forward();
 
-      _heartBeatController.addStatusListener((status) {
+      _animationController.addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           setState(() {
             _activated = newActivated;
             _nextActivated = 0;
           });
-          _heartBeatController.reset();
           _animationController.reset();
         }
       });

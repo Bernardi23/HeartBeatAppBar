@@ -27,20 +27,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  assets:
-   - assets/icons/heart.svg
-   - assets/icons/message-square.svg
-   - assets/icons/search.svg
-   - assets/icons/shopping-cart.svg
-
   fonts:
-    - family: Google Sans
-      fonts:
-        - asset: assets/fonts/ProductSans-Regular.ttf
-        - asset: assets/fonts/ProductSans-Light.ttf
-          weight: 200
-        - asset: assets/fonts/ProductSans-Bold.ttf
-          weight: 700  
     - family: Feather
       fonts:
         - asset: assets/fonts/feather.ttf
