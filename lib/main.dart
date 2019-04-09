@@ -9,12 +9,11 @@ void main() => runApp(AnimatedAppBarApp());
 class AnimatedAppBarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: Colors.transparent, //or set color with: Color(0xFF0000FF)
-    ));
+    // Set Status bar transparent
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HeartBeatPage(),
+      home: HeartBeatPage(from: 1, to: 1, body: HeartBeatPage.defaultPages[1]),
     );
   }
 }

@@ -7,17 +7,11 @@ class HeartBeatPainter extends CustomPainter {
   double ending;
   Animation<double> animation;
 
-  double lerp(double v0, double v1, double t) {
-    return (1 - t) * v0 + t * v1;
-  }
+  double lerp(double v0, double v1, double t) => (1 - t) * v0 + t * v1;
 
-  double sigmoid(double x) {
-    return 0.5 * (sin(x * pi - pi / 2) + 1);
-  }
+  double sigmoid(double x) => 0.5 * (sin(x * pi - pi / 2) + 1);
 
-  double parabola(double x) {
-    return pow(((cos(x) + 1) / 2), 10);
-  }
+  double parabola(double x) => pow(((cos(x) + 1) / 2), 10);
 
   bool inversed;
   List<Offset> _points;
@@ -209,10 +203,10 @@ class HeartBeatPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     double percentage = _points.length * animation.value;
 
-    int start =
-        lerp(0, percentage, pow(sigmoid(pow(animation.value, 5)), 1)).floor();
+    int start = lerp(0, percentage, pow(sigmoid(pow(animation.value, 5)), 1)).floor();
 
     Path heartBeatPath = Path()..moveTo(_points[start].dx, 0);
+
     for (int i = start + 1; i < (percentage).round(); i++) {
       heartBeatPath.lineTo(_points[i].dx, _points[i].dy);
     }
