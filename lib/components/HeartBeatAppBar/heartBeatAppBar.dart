@@ -277,19 +277,3 @@ class _HeartBeatAppBarContentState extends State<HeartBeatAppBarContent> with Si
     );
   }
 }
-
-class NewPage extends StatelessWidget {
-  final int from, to;
-
-  NewPage({@required this.from, @required this.to});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: HeartBeatAppBar(to: to, from: from),
-      body: Center(
-        child: Text("hello world"),
-      ),
-    );
-  }
-}
